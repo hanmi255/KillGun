@@ -1,6 +1,6 @@
 [gd_scene load_steps=35 format=3 uid="uid://bnb6cecxe6eud"]
 
-[ext_resource type="PackedScene" uid="uid://ddt4uo3x0mp2u" path="res://scenes/enemy/BaseEnemy.tscn" id="1_a1s4i"]
+[ext_resource type="PackedScene" uid="uid://ddt4uo3x0mp2u" path="res://scenes/enemy/base_enemy.tscn" id="1_a1s4i"]
 [ext_resource type="Texture2D" uid="uid://clci8750mx755" path="res://assets/texture/Ghoul/Ghoul Sprite Sheet 62 x 33.png" id="2_x723t"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0jrsf"]

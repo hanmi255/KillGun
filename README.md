@@ -4,8 +4,6 @@
 
 Kill Gun 是一款使用 Godot 引擎开发的 2D 自上而下射击游戏。玩家控制角色在地图上移动，使用武器消灭敌人，通过不同关卡进行游戏。
 
-Kill Gun is a 2D top-down shooter game developed using the Godot engine. Players control a character to move around the map, use weapons to eliminate enemies, and progress through different levels.
-
 ## 项目架构 (Project Architecture)
 
 ### 核心系统 (Core Systems)

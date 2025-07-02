@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://ctiap4k6c8odx" path="res://scripts/main/main.gd" id="1_cx71v"]
 [ext_resource type="Texture2D" uid="uid://btjht08xbphf5" path="res://assets/texture/Tileset.png" id="1_ou3qd"]
-[ext_resource type="PackedScene" uid="uid://b8wrxqk74k07i" path="res://scenes/ui/canvas_layer/CanvasLayer.tscn" id="2_hr7lf"]
+[ext_resource type="PackedScene" uid="uid://b8wrxqk74k07i" path="res://scenes/ui/canvas_layer/canvas_layer.tscn" id="2_hr7lf"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_rjgad"]
 vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)

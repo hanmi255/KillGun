@@ -1,25 +1,22 @@
 class_name BaseWeapon
 extends Node2D
 
-const _pre_bullet = preload("res://scenes/bullet/BaseBullet.tscn")
+const BULLET = preload("res://scenes/bullet/base_bullet.tscn")
 
 @export var weapon_name = '默认枪械'
 @export var bullet_max = 30
 @export var damage = 5
 @export var weapon_rof = 0.2
+@export var weapon_reload_start : AudioStream
+@export var weapon_reload_end : AudioStream
+@export var weapon_fire : AudioStream
 
 var current_bullet_count = 0
 var current_rof_tick = 0
 
-const reload_audio = [
-	"res://assets/audio/wpn_reload_start.mp3", "res://assets/audio/wpn_reload_end.mp3"
-]
-
 @onready var sprite = $Sprite2D
 @onready var bullet_point = $BulletPoint
 @onready var fire_particles = $GPUParticles2D
-@onready var audio2d = $AudioStreamPlayer2D
-@onready var audio_reload = $AudioStreamPlayer2D2
 
 var player: Player
 
@@ -40,7 +37,7 @@ func _process(delta: float) -> void:
 
 
 func shoot():
-	var instance = _pre_bullet.instantiate()
+	var instance = BULLET.instantiate()
 	instance.global_position = bullet_point.global_position
 	instance.dir = global_position.direction_to(get_global_mouse_position())
 	instance.current_weapon = self
@@ -62,19 +59,17 @@ func weapon_anim():
 	tween.tween_property(sprite, "scale:x", 0.7, weapon_rof / 2)
 	tween.tween_property(sprite, "scale:x", 1, weapon_rof / 2)
 
-	audio2d.play()
+	SFXPlayer.play(weapon_fire)
 
 	Game.camera_offset(Vector2(-1.5, 2), weapon_rof)
 
 
 func reload():
-	audio_reload.stream = load(reload_audio[0])
-	audio_reload.play()
+	SFXPlayer.play(weapon_reload_start)
 	PlayerManager.on_weapon_reload.emit()
 
 	await get_tree().create_timer(2 - 0.42).timeout
-	audio_reload.stream = load(reload_audio[1])
-	audio_reload.play()
+	SFXPlayer.play(weapon_reload_end)
 
 	await get_tree().create_timer(0.42).timeout # 模拟换弹需要2秒
 	current_bullet_count = bullet_max

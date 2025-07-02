@@ -10,12 +10,12 @@ enum State {
 }
 
 @export var speed = 30
+@export var hit_audio : AudioStream
 
 @onready var anim = $Body/AnimatedSprite2D
 @onready var body = $Body
 @onready var coll = $CollisionShape2D
 @onready var shadow = $Shadow
-@onready var hit_audio = $AudioStreamPlayer2D
 @onready var nav = $NavigationAgent2D
 
 var _tick = 0
@@ -40,7 +40,7 @@ func _ready() -> void:
 func on_hit(_damage):
 	current_state = State.HIT
 
-	hit_audio.play()
+	SFXPlayer.play(hit_audio)
 	Game.show_label(self, '-%s'%_damage)
 
 	anim.play("hit")

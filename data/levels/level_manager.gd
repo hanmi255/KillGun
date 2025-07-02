@@ -1,18 +1,18 @@
 extends Node
 
-const level_path = "res://data/levels/level/"
+const LEVEL_PATH = "res://data/levels/level/"
+
+signal on_level_changed(level_data: LevelData)
 
 var level_data: Array[LevelData]
 
 var current_level = 0
 
-signal on_level_changed(level_data: LevelData)
-
 
 func _ready() -> void:
-	var files = DirAccess.get_files_at(level_path)
+	var files = DirAccess.get_files_at(LEVEL_PATH)
 	for file_name in files:
-		level_data.append(load(level_path + file_name))
+		level_data.append(load(LEVEL_PATH + file_name))
 
 
 func new_level():

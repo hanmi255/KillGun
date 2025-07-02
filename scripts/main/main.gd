@@ -1,6 +1,6 @@
 extends Node2D
 
-const _player = preload("res://scenes/player/player.tscn")
+const PLAYER = preload("res://scenes/player/player.tscn")
 
 @onready var canvas_layer = $CanvasLayer
 @onready var map_land = $Land
@@ -38,5 +38,5 @@ func on_game_start():
 		get_parent().color_rect.hide()
 	)
 
-	var instance = _player.instantiate()
+	var instance = PLAYER.instantiate()
 	add_child(instance)

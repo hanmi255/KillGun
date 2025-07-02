@@ -3,6 +3,7 @@ extends Control
 @onready var control = $Control
 @onready var color_rect = $CanvasLayer/ColorRect
 
+
 func _on_start_pressed() -> void:
 	start_game()
 

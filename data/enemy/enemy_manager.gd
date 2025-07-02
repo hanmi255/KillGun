@@ -1,10 +1,10 @@
 extends Node
 
+signal on_enemy_death()
+
 var enemies = []
 var current_level_data: LevelData
 var timer = Timer.new()
-
-signal on_enemy_death()
 
 
 func _ready() -> void:

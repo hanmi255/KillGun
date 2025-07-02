@@ -1,9 +1,9 @@
 [gd_scene load_steps=2 format=3 uid="uid://b058ejfrqyeia"]
 
-[ext_resource type="Script" uid="uid://ckdgvgqlbdh54" path="res://scripts/ui/hit_label/hit_label.gd" id="1_leamm"]
+[ext_resource type="Script" uid="uid://ckdgvgqlbdh54" path="res://scripts/ui/hit_label/hit_label.gd" id="1_j0bhb"]
 
 [node name="HitLabel" type="Node2D"]
-script = ExtResource("1_leamm")
+script = ExtResource("1_j0bhb")
 
 [node name="Label" type="Label" parent="."]
 offset_left = -38.0

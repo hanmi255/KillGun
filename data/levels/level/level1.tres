@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="LevelData" load_steps=3 format=3 uid="uid://bow3trf7k4tre"]
 
-[ext_resource type="Script" uid="uid://blwb7ayvgjcco" path="res://data/levels/LevelData.gd" id="1_b347r"]
-[ext_resource type="PackedScene" uid="uid://bnb6cecxe6eud" path="res://scenes/enemy/Ghoul.tscn" id="1_y22q8"]
+[ext_resource type="Script" uid="uid://blwb7ayvgjcco" path="res://data/levels/level_data.gd" id="1_b347r"]
+[ext_resource type="PackedScene" uid="uid://bnb6cecxe6eud" path="res://scenes/enemy/ghoul.tscn" id="1_y22q8"]
 
 [resource]
 script = ExtResource("1_b347r")

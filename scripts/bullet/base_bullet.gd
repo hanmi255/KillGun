@@ -1,7 +1,7 @@
 class_name BaseBullet
 extends Node2D
 
-const _pre_hit_effect = preload("res://scenes/hit_effect/HitEffect.tscn")
+const HIT_EFFECT = preload("res://scenes/hit_effect/hit_effect.tscn")
 
 @export var speed = 800
 @export var dir = Vector2.ZERO
@@ -26,7 +26,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body is BaseEnemy:
 		Game.damage(Game.player, body)
 		set_physics_process(false)
-		var ins = _pre_hit_effect.instantiate()
+		var ins = HIT_EFFECT.instantiate()
 		ins.global_position = global_position
 		Game.map.add_child(ins)
 		queue_free()
