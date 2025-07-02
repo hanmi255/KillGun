@@ -11,16 +11,16 @@ config_version=5
 [application]
 
 config/name="KillGun"
-run/main_scene="res://ui/MainUI.tscn"
+run/main_scene="uid://bch08ks4chcij"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="uid://dcieexh8ql15g"
 
 [autoload]
 
-Game="*res://script/Game.gd"
-PlayerManager="*res://script/PlayerManager.gd"
-LevelManager="*res://script/LevelManager.gd"
-EnemyManager="*res://script/EnemyManager.gd"
+Game="*res://data/game/Game.gd"
+PlayerManager="*res://data/player/PlayerManager.gd"
+LevelManager="*res://data/levels/LevelManager.gd"
+EnemyManager="*res://data/enemy/EnemyManager.gd"
 
 [display]
 

@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://b058ejfrqyeia"]
+
+[ext_resource type="Script" uid="uid://ckdgvgqlbdh54" path="res://scripts/ui/hit_label/hit_label.gd" id="1_leamm"]
+
+[node name="HitLabel" type="Node2D"]
+script = ExtResource("1_leamm")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -38.0
+offset_top = -36.0
+offset_right = 37.0
+offset_bottom = -13.0
+pivot_offset = Vector2(38, 12)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.556863)
+theme_override_font_sizes/font_size = 12
+text = "-9"
+horizontal_alignment = 1
+vertical_alignment = 1

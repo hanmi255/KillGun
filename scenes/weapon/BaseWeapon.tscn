@@ -1,0 +1,67 @@
+[gd_scene load_steps=11 format=3 uid="uid://b25fcx7ab7e8h"]
+
+[ext_resource type="Script" uid="uid://c4t4vfb73ohsh" path="res://scripts/weapon/base_weapon.gd" id="1_527q3"]
+[ext_resource type="Texture2D" uid="uid://rsfj2l2m4kxo" path="res://assets/texture/Guns/gun1.png" id="1_kcyxn"]
+[ext_resource type="AudioStream" uid="uid://3rr0co4axjks" path="res://assets/audio/wpn_fire_hk416.mp3" id="3_t6kf7"]
+
+[sub_resource type="Curve" id="Curve_r2ry7"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.742466, 0.986185), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_y28p8"]
+curve = SubResource("Curve_r2ry7")
+
+[sub_resource type="Gradient" id="Gradient_n41ry"]
+offsets = PackedFloat32Array(0, 0.243323, 1)
+colors = PackedColorArray(0.999999, 0.904514, 0.797038, 1, 0.761255, 0.40747, 0.233723, 1, 0.780199, 0.268212, 0.243613, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_neoli"]
+gradient = SubResource("Gradient_n41ry")
+
+[sub_resource type="Curve" id="Curve_ev8ys"]
+_data = [Vector2(0, 0.115834), 0.0, 0.0, 0, 0, Vector2(0.293151, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.523379), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_ficry"]
+curve = SubResource("Curve_ev8ys")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ebti8"]
+particle_flag_disable_z = true
+spread = 51.429
+initial_velocity_min = 30.0
+initial_velocity_max = 80.0
+gravity = Vector3(0, 0, 0)
+scale_min = 2.0
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_ficry")
+color_ramp = SubResource("GradientTexture1D_neoli")
+alpha_curve = SubResource("CurveTexture_y28p8")
+
+[node name="BaseWeapon" type="Node2D"]
+script = ExtResource("1_527q3")
+bullet_max = 60
+weapon_rof = 0.12
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_kcyxn")
+offset = Vector2(3, -1)
+
+[node name="BulletPoint" type="Node2D" parent="."]
+position = Vector2(9, -2)
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(9, -2)
+emitting = false
+amount = 16
+lifetime = 0.2
+one_shot = true
+explosiveness = 1.0
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_ebti8")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_t6kf7")
+volume_db = -5.0
+
+[node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="."]
+volume_db = -5.0
