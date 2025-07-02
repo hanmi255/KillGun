@@ -1,0 +1,146 @@
+[gd_scene load_steps=8 format=3 uid="uid://b8wrxqk74k07i"]
+
+[ext_resource type="Script" uid="uid://dhn0a771k2jbn" path="res://ui/hud.gd" id="1_nux2v"]
+[ext_resource type="Script" uid="uid://bfynsj5daf8vt" path="res://ui/canvas_layer.gd" id="1_opxb0"]
+[ext_resource type="Texture2D" uid="uid://rsfj2l2m4kxo" path="res://texture/Guns/gun1.png" id="2_3igvm"]
+[ext_resource type="Texture2D" uid="uid://d15ufuv842cxs" path="res://texture/crosshair161.png" id="4_hk4ke"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0gu7f"]
+bg_color = Color(0, 0, 0, 0.270588)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xjc8a"]
+bg_color = Color(0.581027, 0.843745, 0.350771, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ln3hk"]
+bg_color = Color(0.141176, 0.141176, 0.141176, 0.282353)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+anti_aliasing = false
+
+[node name="CanvasLayer" type="CanvasLayer"]
+script = ExtResource("1_opxb0")
+
+[node name="HUD" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_nux2v")
+metadata/_edit_lock_ = true
+
+[node name="HpControl" type="Control" parent="HUD"]
+anchors_preset = 0
+offset_right = 258.0
+offset_bottom = 40.0
+
+[node name="HpBar" type="ProgressBar" parent="HUD/HpControl"]
+layout_mode = 0
+offset_left = 34.0
+offset_top = 13.0
+offset_right = 175.0
+offset_bottom = 29.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.631373)
+theme_override_constants/outline_size = 1
+theme_override_font_sizes/font_size = 8
+theme_override_styles/background = SubResource("StyleBoxFlat_0gu7f")
+theme_override_styles/fill = SubResource("StyleBoxFlat_xjc8a")
+value = 100.0
+
+[node name="Label" type="Label" parent="HUD/HpControl"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 9.0
+offset_right = 45.0
+offset_bottom = 32.0
+text = "HP:"
+
+[node name="WeaponHUD" type="Control" parent="HUD"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -171.0
+offset_top = -67.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="TextureRect" type="TextureRect" parent="HUD/WeaponHUD"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -66.0
+offset_top = -25.0
+offset_right = -16.0
+offset_bottom = 25.0
+grow_horizontal = 0
+grow_vertical = 2
+texture = ExtResource("2_3igvm")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="WeaponName" type="Label" parent="HUD/WeaponHUD"]
+layout_mode = 0
+offset_left = 105.0
+offset_top = 12.0
+offset_right = 157.0
+offset_bottom = 24.0
+theme_override_font_sizes/font_size = 8
+text = "武器名称"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 1
+
+[node name="Bullet" type="Label" parent="HUD/WeaponHUD"]
+layout_mode = 0
+offset_left = 49.0
+offset_top = 26.0
+offset_right = 101.0
+offset_bottom = 38.0
+theme_override_font_sizes/font_size = 8
+text = "30/30"
+horizontal_alignment = 2
+vertical_alignment = 1
+autowrap_mode = 1
+
+[node name="Level" type="Label" parent="HUD"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -34.5
+offset_top = 8.0
+offset_right = 34.5
+offset_bottom = 35.0
+grow_horizontal = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_ln3hk")
+text = "关卡 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="HUD"]
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+pivot_offset = Vector2(16, 16)
+texture = ExtResource("4_hk4ke")
+expand_mode = 1
+stretch_mode = 6
