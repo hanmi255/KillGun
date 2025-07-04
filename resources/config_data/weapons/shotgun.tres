@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="WeaponData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://resources/data_models/weapon_data.gd" id="1_2qc6f"]
+
+[resource]
+script = ExtResource("1_2qc6f")
+weapon_name = "霰弹枪"
+weapon_description = "近距离杀伤力巨大，但射速慢且精度低。"
+damage = 25
+max_ammo = 8
+fire_rate = 0.8
+reload_time = 2.5
+bullet_speed = 800.0
+bullet_lifetime = 1.5
+muzzle_flash_scale = 1.5
+camera_shake_intensity = 3.5
+can_auto_fire = false
+accuracy = 0.6
+critical_chance = 0.15
+critical_damage_multiplier = 1.8 

@@ -11,18 +11,17 @@ config_version=5
 [application]
 
 config/name="KillGun"
-run/main_scene="uid://bch08ks4chcij"
+run/main_scene="uid://bwxe5tgddgkd6"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="uid://dcieexh8ql15g"
 
 [autoload]
 
-Game="*res://data/game/game.gd"
-PlayerManager="*res://data/player/player_manager.gd"
-LevelManager="*res://data/levels/level_manager.gd"
-EnemyManager="*res://data/enemy/enemy_manager.gd"
-MusicPlayer="*res://scenes/audio_stream/music_player.tscn"
-SFXPlayer="*res://scenes/audio_stream/sfx_player.tscn"
+EventBus="*res://autoload/event_bus/event_bus.gd"
+ServiceLocator="*res://autoload/service_locator/service_locator.gd"
+Game="*res://autoload/game.gd"
+MusicPlayer="*res://autoload/audio_stream/music_player.tscn"
+SFXPlayer="*res://autoload/audio_stream/sfx_player.tscn"
 
 [display]
 
