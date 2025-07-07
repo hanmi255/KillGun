@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://dv31g0ekdj217"]
+
+[ext_resource type="Script" uid="uid://d1juvs6wskh57" path="res://scenes/ui/menus/start_menu/start_menu.gd" id="1_avafa"]
+
+[node name="StartMenu" type="Node2D"]
+script = ExtResource("1_avafa")
+
+[node name="StartButton" type="Button" parent="."]
+offset_right = 8.0
+offset_bottom = 8.0
+text = "开始游戏"
+
+[node name="OptionsButton" type="Button" parent="."]
+offset_top = 54.0
+offset_right = 40.0
+offset_bottom = 85.0
+text = "设置"
+
+[node name="QuitButton" type="Button" parent="."]
+offset_top = 103.0
+offset_right = 72.0
+offset_bottom = 134.0
+text = "退出游戏"

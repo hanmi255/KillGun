@@ -1,10 +1,13 @@
 class_name PlayerData
 extends Resource
 
-@export var max_hp = 10
-@export var damage = 25
+@export_group("Base")
+@export var max_hp: int = 10
+@export var speed: float = 40.0
 
-@export var gold = 0
+@export_group("Battle")
+@export var weapon: PackedScene: set = _set_weapon
+@export var gold: int = 60: set = _set_gold
 
 var current_hp:
 	set(_value):
@@ -16,3 +19,13 @@ var current_hp:
 
 func _init() -> void:
 	current_hp = max_hp
+
+
+func _set_weapon(value: PackedScene) -> void:
+	weapon = value
+	emit_changed()
+
+
+func _set_gold(value: int) -> void:
+	gold = value
+	emit_changed()

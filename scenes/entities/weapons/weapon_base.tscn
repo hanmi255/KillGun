@@ -1,0 +1,55 @@
+[gd_scene load_steps=10 format=3 uid="uid://xygo75whfp1m"]
+
+[ext_resource type="Script" uid="uid://dq85osjjy0wks" path="res://scenes/entities/weapons/weapon_base.gd" id="1_ogy27"]
+[ext_resource type="Resource" uid="uid://devgc2odbyui2" path="res://resources/config_data/weapons/assault_rifle_hk416.tres" id="2_jxwuo"]
+
+[sub_resource type="Curve" id="Curve_ogy27"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.742466, 0.986185), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_jxwuo"]
+curve = SubResource("Curve_ogy27")
+
+[sub_resource type="Gradient" id="Gradient_n41ry"]
+offsets = PackedFloat32Array(0, 0.243323, 1)
+colors = PackedColorArray(0.999999, 0.904514, 0.797038, 1, 0.761255, 0.40747, 0.233723, 1, 0.780199, 0.268212, 0.243613, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_neoli"]
+gradient = SubResource("Gradient_n41ry")
+
+[sub_resource type="Curve" id="Curve_ev8ys"]
+_data = [Vector2(0, 0.115834), 0.0, 0.0, 0, 0, Vector2(0.293151, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.523379), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_ficry"]
+curve = SubResource("Curve_ev8ys")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ogy27"]
+particle_flag_disable_z = true
+spread = 51.429
+initial_velocity_min = 30.0
+initial_velocity_max = 80.0
+gravity = Vector3(0, 0, 0)
+scale_min = 2.0
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_ficry")
+color_ramp = SubResource("GradientTexture1D_neoli")
+alpha_curve = SubResource("CurveTexture_jxwuo")
+
+[node name="WeaponBase" type="Node2D"]
+script = ExtResource("1_ogy27")
+weapon_data = ExtResource("2_jxwuo")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="BulletSpawnPoint" type="Marker2D" parent="."]
+
+[node name="FireParticles" type="GPUParticles2D" parent="."]
+position = Vector2(9, -2)
+emitting = false
+amount = 16
+texture = SubResource("CurveTexture_jxwuo")
+lifetime = 0.2
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_ogy27")

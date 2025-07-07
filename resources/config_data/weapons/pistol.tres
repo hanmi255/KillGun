@@ -1,6 +1,6 @@
-[gd_resource type="Resource" script_class="WeaponData" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="WeaponData" load_steps=2 format=3 uid="uid://jbpx2lw5hkxo"]
 
-[ext_resource type="Script" path="res://resources/data_models/weapon_data.gd" id="1_2qc6f"]
+[ext_resource type="Script" uid="uid://b85kr4lqg8yj5" path="res://resources/data_models/weapon_data.gd" id="1_2qc6f"]
 
 [resource]
 script = ExtResource("1_2qc6f")
@@ -17,4 +17,4 @@ camera_shake_intensity = 1.5
 can_auto_fire = false
 accuracy = 0.9
 critical_chance = 0.05
-critical_damage_multiplier = 1.5 
+critical_damage_multiplier = 1.5

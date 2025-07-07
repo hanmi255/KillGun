@@ -1,63 +1,72 @@
 class_name WeaponBase
 extends Node2D
 
-# 武器数据资源
-@export var weapon_data: WeaponData
+@export var weapon_data: WeaponData: set = _set_weapon_data
 
-# 当前弹药状态
 var current_ammo: int = 0
 var can_fire: bool = true
 var is_reloading: bool = false
 var fire_timer: float = 0.0
 
-# 节点引用
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var bullet_spawn_point: Marker2D = $BulletSpawnPoint
 @onready var fire_particles: GPUParticles2D = $FireParticles
 
-# 拥有者引用
 var owner_entity = null
 
+
 func _ready() -> void:
-	# 验证武器数据
 	if not weapon_data:
 		push_error("武器没有配置数据！")
 		weapon_data = WeaponData.new()
 	
-	# 应用武器贴图
 	if weapon_data.weapon_texture and sprite:
 		sprite.texture = weapon_data.weapon_texture
 	
-	# 初始化弹药
 	current_ammo = weapon_data.max_ammo
 	
-	# 初始化粒子效果
 	if fire_particles:
 		fire_particles.lifetime = weapon_data.fire_rate - 0.01
-	
-	# 发送武器初始化信号
+
+	EventBus.weapon_changed.connect(_on_weapon_changed)
 	EventBus.weapon_equipped.emit(self)
 	EventBus.weapon_ammo_changed.emit(current_ammo, weapon_data.max_ammo)
 
+
+func _on_weapon_changed(old_weapon_data: WeaponData, new_weapon_data: WeaponData) -> void:
+	if weapon_data == old_weapon_data:
+		_set_weapon_data(new_weapon_data)
+		current_ammo = weapon_data.max_ammo
+		can_fire = true
+		is_reloading = false
+		fire_timer = 0.0
+
+		if weapon_data.weapon_texture and sprite:
+			sprite.texture = weapon_data.weapon_texture
+
+		if fire_particles:
+			fire_particles.lifetime = weapon_data.fire_rate - 0.01
+
+		EventBus.weapon_equipped.emit(self)
+		EventBus.weapon_ammo_changed.emit(current_ammo, weapon_data.max_ammo)
+
+
 func _process(delta: float) -> void:
-	# 武器冷却
 	if not can_fire:
 		fire_timer += delta
 		if fire_timer >= weapon_data.fire_rate:
 			can_fire = true
 			fire_timer = 0.0
 	
-	# 处理射击输入
 	if Input.is_action_pressed("fire") and can_fire and current_ammo > 0 and not is_reloading:
 		if weapon_data.can_auto_fire or Input.is_action_just_pressed("fire"):
 			fire()
 	
-	# 处理换弹输入
 	if Input.is_action_just_pressed("reload") and not is_reloading and current_ammo < weapon_data.max_ammo:
 		reload()
 
+
 func fire() -> void:
-	# 设置冷却
 	can_fire = false
 	
 	# 创建子弹
@@ -95,12 +104,11 @@ func fire() -> void:
 	current_ammo -= 1
 	EventBus.weapon_ammo_changed.emit(current_ammo, weapon_data.max_ammo)
 	
-	# 如果弹药用完，自动换弹
 	if current_ammo <= 0:
 		reload()
 	
-	# 播放射击动画和音效
 	_play_fire_animation()
+
 
 func reload() -> void:
 	if is_reloading or current_ammo == weapon_data.max_ammo:
@@ -108,7 +116,6 @@ func reload() -> void:
 	
 	is_reloading = true
 	
-	# 播放换弹开始音效
 	if weapon_data.reload_start_sound:
 		EventBus.weapon_reload_started.emit(self)
 		ServiceLocator.get_audio_manager().play_sfx(weapon_data.reload_start_sound)
@@ -120,7 +127,6 @@ func reload() -> void:
 	# 换弹结束计时
 	await get_tree().create_timer(end_sound_time).timeout
 	
-	# 播放换弹结束音效
 	if weapon_data.reload_end_sound:
 		ServiceLocator.get_audio_manager().play_sfx(weapon_data.reload_end_sound)
 	
@@ -131,8 +137,8 @@ func reload() -> void:
 	is_reloading = false
 	EventBus.weapon_ammo_changed.emit(current_ammo, weapon_data.max_ammo)
 
+
 func _play_fire_animation() -> void:
-	# 重启粒子效果
 	if fire_particles:
 		fire_particles.restart()
 		fire_particles.scale = Vector2.ONE * weapon_data.muzzle_flash_scale
@@ -157,20 +163,24 @@ func _play_fire_animation() -> void:
 			weapon_data.fire_rate
 		).from(Vector2(-shake_intensity / 2, shake_intensity))
 
+
+func _set_weapon_data(value: WeaponData) -> void:
+	weapon_data = value
+
 func set_owner_entity(entity) -> void:
 	owner_entity = entity
-	
-# 获取武器名称
+
+
 func get_weapon_name() -> String:
 	return weapon_data.weapon_name if weapon_data else "未知武器"
 
-# 获取当前弹药状态
+
 func get_ammo_status() -> Dictionary:
 	return {
 		"current": current_ammo,
 		"max": weapon_data.max_ammo if weapon_data else 0
 	}
 
-# 获取武器描述
+
 func get_weapon_description() -> String:
 	return weapon_data.weapon_description if weapon_data else "无描述"

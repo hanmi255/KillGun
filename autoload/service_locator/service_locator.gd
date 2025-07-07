@@ -7,6 +7,7 @@ var enemy_spawner: Node
 var audio_manager: Node
 var save_manager: Node
 var config_manager: Node
+var weapon_manager: Node
 
 # 服务获取函数
 func get_damage_manager() -> Node:
@@ -27,6 +28,9 @@ func get_save_manager() -> Node:
 func get_config_manager() -> Node:
 	return config_manager
 
+func get_weapon_manager() -> Node:
+	return weapon_manager
+
 # 服务注册函数
 func register_damage_manager(manager: Node) -> void:
 	damage_manager = manager
@@ -45,3 +49,6 @@ func register_save_manager(manager: Node) -> void:
 	
 func register_config_manager(manager: Node) -> void:
 	config_manager = manager
+
+func register_weapon_manager(manager: Node) -> void:
+	weapon_manager = manager

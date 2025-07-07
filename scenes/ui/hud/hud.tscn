@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://cubd2wwhy4mab"]
 
-[ext_resource type="Script" uid="uid://dhn0a771k2jbn" path="res://scripts/ui/hud/hud.gd" id="1_as3gr"]
+[ext_resource type="Script" uid="uid://cgpleaph6scwa" path="res://scenes/ui/hud/hud.gd" id="1_as3gr"]
 [ext_resource type="Texture2D" uid="uid://rsfj2l2m4kxo" path="res://assets/texture/Guns/gun1.png" id="2_ax4tw"]
 [ext_resource type="Texture2D" uid="uid://d15ufuv842cxs" path="res://assets/texture/crosshair161.png" id="3_2wu1p"]
 
@@ -38,12 +38,12 @@ grow_vertical = 2
 script = ExtResource("1_as3gr")
 metadata/_edit_lock_ = true
 
-[node name="HpControl" type="Control" parent="."]
+[node name="HPControl" type="Control" parent="."]
 anchors_preset = 0
 offset_right = 258.0
 offset_bottom = 40.0
 
-[node name="HpBar" type="ProgressBar" parent="HpControl"]
+[node name="HPBar" type="ProgressBar" parent="HPControl"]
 layout_mode = 0
 offset_left = 34.0
 offset_top = 13.0
@@ -56,7 +56,7 @@ theme_override_styles/background = SubResource("StyleBoxFlat_0gu7f")
 theme_override_styles/fill = SubResource("StyleBoxFlat_xjc8a")
 value = 100.0
 
-[node name="Label" type="Label" parent="HpControl"]
+[node name="Label" type="Label" parent="HPControl"]
 layout_mode = 0
 offset_left = 5.0
 offset_top = 9.0
@@ -64,7 +64,7 @@ offset_right = 45.0
 offset_bottom = 32.0
 text = "HP:"
 
-[node name="WeaponHUD" type="Control" parent="."]
+[node name="WeaponControl" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -76,7 +76,7 @@ offset_top = -67.0
 grow_horizontal = 0
 grow_vertical = 0
 
-[node name="TextureRect" type="TextureRect" parent="WeaponHUD"]
+[node name="WeaponIcon" type="TextureRect" parent="WeaponControl"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -93,7 +93,7 @@ texture = ExtResource("2_ax4tw")
 expand_mode = 1
 stretch_mode = 6
 
-[node name="WeaponName" type="Label" parent="WeaponHUD"]
+[node name="WeaponName" type="Label" parent="WeaponControl"]
 layout_mode = 0
 offset_left = 105.0
 offset_top = 12.0
@@ -105,7 +105,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 1
 
-[node name="Bullet" type="Label" parent="WeaponHUD"]
+[node name="AmmoCounter" type="Label" parent="WeaponControl"]
 layout_mode = 0
 offset_left = 49.0
 offset_top = 26.0
@@ -117,7 +117,7 @@ horizontal_alignment = 2
 vertical_alignment = 1
 autowrap_mode = 1
 
-[node name="Level" type="Label" parent="."]
+[node name="WaveCounter" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -128,11 +128,11 @@ offset_right = 34.5
 offset_bottom = 35.0
 grow_horizontal = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_ln3hk")
-text = "关卡 1"
+text = "关卡 1 -  波次 0/2"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="Crosshair" type="TextureRect" parent="."]
 layout_mode = 0
 offset_right = 32.0
 offset_bottom = 32.0

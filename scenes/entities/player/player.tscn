@@ -1,6 +1,6 @@
 [gd_scene load_steps=86 format=3 uid="uid://c0uwsl6ok0cb3"]
 
-[ext_resource type="Script" uid="uid://bpucrjarnty26" path="res://scripts/player/player.gd" id="1_juq2h"]
+[ext_resource type="Script" uid="uid://bssfs4uismk38" path="res://scenes/entities/player/player.gd" id="1_juq2h"]
 [ext_resource type="Texture2D" uid="uid://d0kbahlxf482d" path="res://assets/texture/Without Sword (for gun)/Up/04 Stranded - Pack 4 back up-Idle Up.png" id="1_krqos"]
 [ext_resource type="Texture2D" uid="uid://bruslgw43o0fw" path="res://assets/texture/Without Sword (for gun)/shadow.png" id="1_qohiy"]
 [ext_resource type="Texture2D" uid="uid://0pn7n051p4wd" path="res://assets/texture/Without Sword (for gun)/Down/04 Stranded - Pack 4 back up-Idle Down.png" id="1_y7sxo"]
@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://72fsww414e5y" path="res://assets/texture/Without Sword (for gun)/04 Stranded - Pack 4 back up-Death.png" id="3_n6ybr"]
 [ext_resource type="Texture2D" uid="uid://dafmnb68etdcu" path="res://assets/texture/Without Sword (for gun)/left right/R move.png" id="4_26cq4"]
 [ext_resource type="Texture2D" uid="uid://bntafojuggskn" path="res://assets/texture/Without Sword (for gun)/Up/04 Stranded - Pack 4 back up-Move Up.png" id="6_pxnx3"]
-[ext_resource type="PackedScene" uid="uid://b25fcx7ab7e8h" path="res://scenes/weapon/base_weapon.tscn" id="9_oob1x"]
+[ext_resource type="PackedScene" uid="uid://xygo75whfp1m" path="res://scenes/entities/weapons/weapon_base.tscn" id="9_oob1x"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7peb0"]
 radius = 6.0
@@ -589,11 +589,11 @@ frame = 12
 frame_progress = 1.0
 metadata/_edit_lock_ = true
 
-[node name="WeaponNode" type="Node2D" parent="Body"]
+[node name="WeaponHolder" type="Node2D" parent="Body"]
 z_index = 1
 position = Vector2(0, -9)
 
-[node name="BaseWeapon" parent="Body/WeaponNode" instance=ExtResource("9_oob1x")]
+[node name="BaseWeapon" parent="Body/WeaponHolder" instance=ExtResource("9_oob1x")]
 position = Vector2(2.55902, 1.17636)
 
 [node name="Camera2D" type="Camera2D" parent="."]
