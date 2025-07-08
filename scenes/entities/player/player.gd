@@ -27,6 +27,7 @@ func _ready() -> void:
 	current_health = max_health
 	
 	Game.player = self
+	Game.set_main_camera(camera)
 	
 	EventBus.player_health_changed.emit(current_health, max_health)
 	EventBus.weapon_equipped.connect(_on_weapon_equipped)
@@ -105,9 +106,15 @@ func _get_movement_direction() -> String:
 func _on_weapon_equipped(weapon_instance: WeaponBase) -> void:
 	# 如果已有武器，移除
 	if _current_weapon:
+		weapon_holder.remove_child(_current_weapon)
 		_current_weapon.queue_free()
 
 	_current_weapon = weapon_instance
+	
+	# 检查武器是否已经有父节点，如果有，先移除
+	if weapon_instance.get_parent():
+		weapon_instance.get_parent().remove_child(weapon_instance)
+		
 	weapon_holder.add_child(weapon_instance)
 	
 	# 设置武器拥有者

@@ -1,4 +1,4 @@
-[gd_scene load_steps=86 format=3 uid="uid://c0uwsl6ok0cb3"]
+[gd_scene load_steps=88 format=3 uid="uid://c0uwsl6ok0cb3"]
 
 [ext_resource type="Script" uid="uid://bssfs4uismk38" path="res://scenes/entities/player/player.gd" id="1_juq2h"]
 [ext_resource type="Texture2D" uid="uid://d0kbahlxf482d" path="res://assets/texture/Without Sword (for gun)/Up/04 Stranded - Pack 4 back up-Idle Up.png" id="1_krqos"]
@@ -10,6 +10,8 @@
 [ext_resource type="Texture2D" uid="uid://dafmnb68etdcu" path="res://assets/texture/Without Sword (for gun)/left right/R move.png" id="4_26cq4"]
 [ext_resource type="Texture2D" uid="uid://bntafojuggskn" path="res://assets/texture/Without Sword (for gun)/Up/04 Stranded - Pack 4 back up-Move Up.png" id="6_pxnx3"]
 [ext_resource type="PackedScene" uid="uid://xygo75whfp1m" path="res://scenes/entities/weapons/weapon_base.tscn" id="9_oob1x"]
+[ext_resource type="Script" uid="uid://m7p74w5cgn7s" path="res://scripts/core/state_machine/state_machine.gd" id="11_j0oqr"]
+[ext_resource type="Script" uid="uid://knekb6d2j2f6" path="res://scripts/core/state_machine/player_states/player_death_state.gd" id="12_xy2vv"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7peb0"]
 radius = 6.0
@@ -599,3 +601,11 @@ position = Vector2(2.55902, 1.17636)
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(1.2, 1.2)
 process_callback = 0
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("11_j0oqr")
+metadata/_custom_type_script = "uid://m7p74w5cgn7s"
+
+[node name="PlayerDeathState" type="Node" parent="StateMachine"]
+script = ExtResource("12_xy2vv")
+metadata/_custom_type_script = "uid://knekb6d2j2f6"

@@ -9,7 +9,7 @@
 
 [resource]
 script = ExtResource("5_s6dqj")
-weapon_name = "突击步枪M4"
+weapon_name = "M4"
 weapon_description = "高射速突击步枪，适合中距离作战。"
 damage = 8
 max_ammo = 30

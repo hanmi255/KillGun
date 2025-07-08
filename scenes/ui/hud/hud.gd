@@ -17,6 +17,10 @@ func _ready() -> void:
 	EventBus.level_started.connect(_on_level_started)
 
 
+func _process(_delta: float) -> void:
+	if crosshair:
+		crosshair.position = get_viewport().get_mouse_position()
+
 func show_hud(value: bool = true) -> void:
 	self.visible = value
 
@@ -55,14 +59,16 @@ func _on_damage_number_requested(position: Vector2, amount: int, is_critical: bo
 
 func _on_level_started(level_data) -> void:
 	if wave_counter:
-		wave_counter.text = "关卡 %d - 波次 0/%d" % [level_data.level_id, level_data.total_waves]
+		wave_counter.text = "关卡 %s - 波次 0/%d" % [level_data.level_id, level_data.total_waves]
 
 
 func update_wave_counter(current_wave: int, total_waves: int, level_id: int) -> void:
 	if wave_counter:
-		wave_counter.text = "关卡 %d - 波次 %d/%d" % [level_id, current_wave, total_waves]
+		wave_counter.text = "关卡 %s - 波次 %d/%d" % [level_id, current_wave, total_waves]
 
 
 func set_crosshair(texture: Texture) -> void:
 	if crosshair:
 		crosshair.texture = texture
+
+	crosshair.position = get_viewport().get_mouse_position()

@@ -29,6 +29,10 @@ class DamageInfo:
 		return self
 
 
+func _ready() -> void:
+	ServiceLocator.register_damage_manager(self)
+
+
 func _calculate_damage(source, target, base_damage: int, damage_type: int = DamageType.PHYSICAL) -> DamageInfo:
 	var damage_info = DamageInfo.new(base_damage, source, target, damage_type)
 	

@@ -29,7 +29,6 @@ func _ready() -> void:
 		fire_particles.lifetime = weapon_data.fire_rate - 0.01
 
 	EventBus.weapon_changed.connect(_on_weapon_changed)
-	EventBus.weapon_equipped.emit(self)
 	EventBus.weapon_ammo_changed.emit(current_ammo, weapon_data.max_ammo)
 
 
@@ -47,7 +46,6 @@ func _on_weapon_changed(old_weapon_data: WeaponData, new_weapon_data: WeaponData
 		if fire_particles:
 			fire_particles.lifetime = weapon_data.fire_rate - 0.01
 
-		EventBus.weapon_equipped.emit(self)
 		EventBus.weapon_ammo_changed.emit(current_ammo, weapon_data.max_ammo)
 
 

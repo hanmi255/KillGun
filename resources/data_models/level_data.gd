@@ -50,7 +50,7 @@ func is_complete() -> bool:
 
 
 func get_random_point() -> Vector2:
-	var map_land = Game.map.map_land as TileMapLayer
+	var map_land = Game.map_land as TileMapLayer
 	var rect = map_land.get_used_rect()
 	var point = Vector2i(
 		randi_range(rect.position.x, rect.position.x + rect.size.x),
