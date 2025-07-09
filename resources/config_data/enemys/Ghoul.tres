@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=3 format=3 uid="uid://cjof0q4mf6am3"]
+
+[ext_resource type="Script" uid="uid://bdr6eh2phu4o3" path="res://resources/data_models/enemy_data.gd" id="1_cij2g"]
+[ext_resource type="AudioStream" uid="uid://41ue70tekm8w" path="res://assets/audio/physics_body_impact_bullet_1.mp3" id="1_jtynv"]
+
+[resource]
+script = ExtResource("1_cij2g")
+name = "Ghoul"
+max_hp = 50
+speed = 30.0
+attack_damage = 5
+attack_range = 20.0
+attack_cd = 1.0
+detection_range = 200.0
+hit_sound = ExtResource("1_jtynv")
+metadata/_custom_type_script = "uid://bdr6eh2phu4o3"
