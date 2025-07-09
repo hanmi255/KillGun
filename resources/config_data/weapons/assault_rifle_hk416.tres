@@ -11,8 +11,8 @@
 script = ExtResource("5_jn7d1")
 weapon_name = "HK416"
 weapon_description = "高射速突击步枪，适合中距离作战。"
-damage = 10
-max_ammo = 30
+damage = 100
+max_ammo = 9999999999
 fire_rate = 0.1
 reload_time = 2.0
 bullet_speed = 1000.0

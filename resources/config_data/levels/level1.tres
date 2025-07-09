@@ -1,15 +1,15 @@
-[gd_resource type="Resource" script_class="LevelData" load_steps=3 format=3 uid="uid://bow3trf7k4tre"]
+[gd_resource type="Resource" script_class="LevelData" load_steps=4 format=3 uid="uid://bow3trf7k4tre"]
 
 [ext_resource type="Script" uid="uid://dmtqqin28kbcn" path="res://resources/data_models/level_data.gd" id="1_b347r"]
-[ext_resource type="PackedScene" uid="uid://dd4xvy1fhmq3d" path="res://scenes/entities/enemies/enemy_base.tscn" id="1_y22q8"]
+[ext_resource type="Script" uid="uid://bdr6eh2phu4o3" path="res://resources/data_models/enemy_data.gd" id="1_h75s1"]
+[ext_resource type="Resource" uid="uid://cjof0q4mf6am3" path="res://resources/config_data/enemys/Ghoul.tres" id="2_lr0ae"]
 
 [resource]
 script = ExtResource("1_b347r")
-level_id = "1"
+level_id = 1
 tick = 0.5
 total_waves = 5
 enemies_per_wave = Array[int]([20, 20, 20, 20, 20])
-enemy_types = Array[String](["Ghoul"])
-enemy_scenes = Dictionary[String, PackedScene]({
-"Ghoul": ExtResource("1_y22q8")
+enemies_data = Dictionary[int, ExtResource("1_h75s1")]({
+0: ExtResource("2_lr0ae")
 })

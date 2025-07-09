@@ -41,7 +41,7 @@ func physics_process(delta: float) -> void:
 		var next_position = owner_entity.nav_agent.get_next_path_position()
 		var direction = owner_entity.global_position.direction_to(next_position)
 		
-		owner_entity.velocity = direction * owner_entity.movement_speed
+		owner_entity.velocity = direction * owner_entity.enemy_data.speed
 		owner_entity._update_facing(direction)
 		
 		owner_entity.move_and_slide()

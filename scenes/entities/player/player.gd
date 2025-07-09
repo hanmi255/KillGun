@@ -9,13 +9,12 @@ enum PlayerState {
 	DEATH
 }
 
-@export var movement_speed: float = 70.0
+@export var player_data: PlayerData
 
 @onready var animated_sprite: AnimatedSprite2D = $Body/AnimatedSprite2D
 @onready var body: Node2D = $Body
 @onready var weapon_holder: Node2D = $Body/WeaponHolder
 @onready var camera: Camera2D = $Camera2D
-@onready var state_machine: StateMachine = $StateMachine
 
 var _current_animation_prefix: String = 'down_'
 var _current_weapon = null
@@ -41,7 +40,7 @@ func _physics_process(_delta: float) -> void:
 	direction.x = Input.get_axis("move_left", "move_right")
 	direction.y = Input.get_axis("move_up", "move_down")
 	
-	velocity = direction.normalized() * movement_speed
+	velocity = direction.normalized() * player_data.speed
 	
 	_update_animation()
 	
@@ -60,7 +59,7 @@ func take_damage(damage_amount: int) -> void:
 func die() -> void:
 	weapon_holder.hide()
 	
-	state_machine.change_state("death")
+	animated_sprite.play("death")
 	
 	EventBus.player_death.emit()
 

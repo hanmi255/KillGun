@@ -52,14 +52,11 @@ func _animate(is_critical: bool) -> void:
 	tween.tween_callback(queue_free)
 
 
-static func create(parent: Node, _position: Vector2, damage: int, is_critical: bool = false) -> DamageLabel:
+static func create(parent: Node, _position: Vector2, damage: int, is_critical: bool = false) -> void:
 	var damage_label_scene = load("res://scenes/ui/hud/damage_label/damage_label.tscn")
 	
 	var instance = damage_label_scene.instantiate()
 	parent.add_child(instance)
-	
+
 	instance.global_position = _position
-	
 	instance._set_damage(damage, is_critical)
-	
-	return instance

@@ -6,6 +6,7 @@ var current_health: int = 100
 var max_health: int = 100
 var is_dead: bool = false
 
+
 func take_damage(damage_amount: int) -> void:
 	current_health = max(0, current_health - damage_amount)
 	
@@ -13,8 +14,10 @@ func take_damage(damage_amount: int) -> void:
 		is_dead = true
 		die()
 
+
 func die() -> void:
 	pass
+
 
 func heal(amount: int) -> void:
 	current_health = min(max_health, current_health + amount)

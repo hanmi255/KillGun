@@ -6,7 +6,7 @@ extends Node
 
 var levels: Array = []
 var current_level_index: int = -1
-var current_level_data = null
+var current_level_data: LevelData = null
 
 
 func _ready() -> void:
@@ -16,6 +16,7 @@ func _ready() -> void:
 
 	EventBus.level_completed.connect(_on_level_completed)
 	EventBus.game_started.connect(_on_game_started)
+
 
 func _load_levels() -> void:
 	var dir = DirAccess.open(levels_config_path)

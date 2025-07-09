@@ -1,17 +1,17 @@
 class_name EnemySpawner
 extends Node
 
-var active_enemies: Array = []
+const EnemyBaseScene = preload("res://scenes/entities/enemies/enemy_base.tscn")
 
 @export var spawn_interval: float = 2.0
 @export var max_enemies: int = 20
 @export var spawn_radius: float = 500.0
 
 var _spawn_timer: float = 0.0
-var _current_level_data = null
-var _current_wave_count: int = 0
-
-@export var enemy_scenes: Dictionary = {}
+var _current_level_data: LevelData = null
+var _current_wave_count: int = 1
+var _enemies_data: Dictionary = {}
+var active_enemies: Array = []
 
 
 func _ready() -> void:
@@ -34,30 +34,34 @@ func spawn_enemy() -> void:
 		return
 
 	var enemy_type = _current_level_data.get_next_enemy_type()
-	if not enemy_type or not enemy_scenes.has(enemy_type):
-		return
 
-	var enemy_scene = enemy_scenes[enemy_type]
-	var enemy_instance = enemy_scene.instantiate()
+	var enemy_data = _enemies_data[enemy_type]
+	var enemy_instance = EnemyBaseScene.instantiate()
+	enemy_instance.enemy_data = enemy_data
 
 	var spawn_position = _get_spawn_position()
 	enemy_instance.global_position = spawn_position
 
-	if enemy_instance.has_method("set_target") and get_tree().has_group("player"):
-		var player = get_tree().get_nodes_in_group("player")[0]
-		enemy_instance.set_target(player)
+	if enemy_instance.has_method("set_target") and Game.player:
+		enemy_instance.set_target(Game.player)
 
-	get_tree().current_scene.add_child(enemy_instance)
+	Game.map_land.add_child(enemy_instance)
+	enemy_instance.add_to_group("enemies")
 
 	active_enemies.append(enemy_instance)
 
 	_current_level_data.enemy_spawned()
+	
+	# 检查当前波次是否完成
+	if _current_level_data.is_wave_complete():
+		_current_wave_count += 1
+		EventBus.wave_completed.emit(_current_level_data.level_id, _current_wave_count, _current_level_data.total_waves)
 
 
 func _get_spawn_position() -> Vector2:
 	var player_position = Vector2.ZERO
-	if get_tree().has_group("player"):
-		player_position = get_tree().get_nodes_in_group("player")[0].global_position
+	if Game.player:
+		player_position = Game.player.global_position
 
 	var angle = randf() * TAU
 	var distance = spawn_radius
@@ -74,7 +78,11 @@ func _on_enemy_death(enemy) -> void:
 		EventBus.level_completed.emit(_current_level_data.level_id)
 
 
-func _on_level_started(level_data) -> void:
+func _on_level_started(level_data: LevelData) -> void:
 	_current_level_data = level_data
-	_current_wave_count = 0
+	_current_wave_count = 1
 	_spawn_timer = 0.0
+	_enemies_data = _current_level_data.enemies_data
+	
+	# 初始化波次计数器显示
+	EventBus.wave_completed.emit(_current_level_data.level_id, _current_wave_count, _current_level_data.total_waves)

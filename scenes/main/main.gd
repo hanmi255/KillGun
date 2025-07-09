@@ -37,5 +37,6 @@ func _on_game_start() -> void:
 	hud.show_hud();
 
 	var player_instance = PLAYER_SCENE.instantiate()
-	add_child(player_instance)
+	Game.map_land.add_child(player_instance)
+	player_instance.add_to_group("player")
 	Game.player = player_instance

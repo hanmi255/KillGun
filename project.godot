@@ -38,6 +38,10 @@ window/stretch/aspect="expand"
 
 project/assembly_name="Godot 2D Game"
 
+[global_group]
+
+player=""
+
 [input]
 
 move_up={

@@ -1,38 +1,35 @@
 class_name LevelData
 extends Resource
 
+enum EnemyType {
+	GHOUL,
+	SPITTER,
+	SUMMONER
+}
+
 @export_group("Level Info")
-@export var level_id: String = ""
+@export var level_id: int = 1
 @export var tick: float = 2.0
 
 @export_group("Wave System")
 @export var total_waves: int = 1
 @export var enemies_per_wave: Array[int] = []
-
-@export_group("Enemy Types")
-@export var enemy_types: Array[String] = []
-@export var enemy_scenes: Dictionary[String, PackedScene] = {}
+@export var enemies_data: Dictionary[EnemyType, EnemyData] = {}
 
 var _current_wave: int = 0
 var _spawned_in_wave: int = 0
 var _total_spawned: int = 0
 
 
-func get_next_enemy_type() -> String:
-	if enemy_types.is_empty():
-		return ""
+func get_next_enemy_type() -> EnemyType:
+	if enemies_data.is_empty():
+		return EnemyType.GHOUL
 	
-	if enemy_types.size() == 1:
-		return enemy_types[0]
-	
-
-	return enemy_types[randi() % enemy_types.size()]
+	return enemies_data.keys()[randi() % enemies_data.size()]
 
 
-func get_enemy_scene(enemy_type: String) -> PackedScene:
-	if enemy_scenes.has(enemy_type):
-		return enemy_scenes[enemy_type]
-	return null
+func get_enemy_data(enemy_type: EnemyType) -> EnemyData:
+	return enemies_data.get(enemy_type)
 
 
 func enemy_spawned() -> void:
@@ -73,3 +70,14 @@ func get_total_remaining() -> int:
 		else:
 			total += enemies_per_wave[i]
 	return total
+
+
+func is_wave_complete() -> bool:
+	if _current_wave >= total_waves:
+		return false
+		
+	# 检查当前波次的敌人是否都已生成
+	if _current_wave < enemies_per_wave.size() and _spawned_in_wave >= enemies_per_wave[_current_wave]:
+		return true
+	
+	return false

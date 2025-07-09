@@ -9,7 +9,7 @@ signal state_changed(new_state_name: String)
 var current_state: State
 var states: Dictionary = {}
 
-var current_state_name: String = ""
+var current_state_name: String = "idle"
 
 
 func _ready() -> void:

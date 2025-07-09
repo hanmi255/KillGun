@@ -280,10 +280,8 @@ shape = SubResource("CapsuleShape2D_ieam0")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Body"]
 position = Vector2(2, -16)
 sprite_frames = SubResource("SpriteFrames_35c4o")
-animation = &"hit"
+animation = &"idle"
 autoplay = "idle"
-frame = 3
-frame_progress = 1.0
 
 [node name="AttackArea" type="Area2D" parent="."]
 
@@ -300,9 +298,10 @@ neighbor_distance = 200.0
 max_neighbors = 8
 max_speed = 0.01
 
-[node name="StateMachine" type="Node" parent="."]
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("owner_entity")]
 script = ExtResource("4_gehyo")
 initial_state = NodePath("Idle")
+owner_entity = NodePath("..")
 
 [node name="Idle" type="Node" parent="StateMachine"]
 script = ExtResource("5_nfpyb")
@@ -319,4 +318,6 @@ script = ExtResource("8_x6h4t")
 [node name="Death" type="Node" parent="StateMachine"]
 script = ExtResource("9_g4qbu")
 
+[connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_entered"]
+[connection signal="body_exited" from="AttackArea" to="." method="_on_attack_area_exited"]
 [connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]

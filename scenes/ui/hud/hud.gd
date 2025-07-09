@@ -14,12 +14,13 @@ func _ready() -> void:
 	EventBus.weapon_equipped.connect(_on_weapon_equipped)
 	EventBus.weapon_ammo_changed.connect(_on_weapon_ammo_changed)
 	EventBus.damage_number_requested.connect(_on_damage_number_requested)
-	EventBus.level_started.connect(_on_level_started)
+	EventBus.wave_completed.connect(_on_wave_completed)
 
 
 func _process(_delta: float) -> void:
 	if crosshair:
 		crosshair.position = get_viewport().get_mouse_position()
+
 
 func show_hud(value: bool = true) -> void:
 	self.visible = value
@@ -54,17 +55,12 @@ func _on_weapon_ammo_changed(current: int, maximum: int) -> void:
 
 
 func _on_damage_number_requested(position: Vector2, amount: int, is_critical: bool) -> void:
-	DamageLabel.create(self, position, amount, is_critical)
+	DamageLabel.create(Game.map_land, position, amount, is_critical)
 
 
-func _on_level_started(level_data) -> void:
+func update_wave_counter(level_id: int, current_wave: int, total_waves: int) -> void:
 	if wave_counter:
-		wave_counter.text = "关卡 %s - 波次 0/%d" % [level_data.level_id, level_data.total_waves]
-
-
-func update_wave_counter(current_wave: int, total_waves: int, level_id: int) -> void:
-	if wave_counter:
-		wave_counter.text = "关卡 %s - 波次 %d/%d" % [level_id, current_wave, total_waves]
+		wave_counter.text = "关卡 %d - 波次 %d/%d" % [level_id, current_wave, total_waves]
 
 
 func set_crosshair(texture: Texture) -> void:
@@ -72,3 +68,7 @@ func set_crosshair(texture: Texture) -> void:
 		crosshair.texture = texture
 
 	crosshair.position = get_viewport().get_mouse_position()
+
+
+func _on_wave_completed(level_id: int, current_wave: int, total_waves: int) -> void:
+	update_wave_counter(level_id, current_wave, total_waves)

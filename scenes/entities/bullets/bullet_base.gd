@@ -36,12 +36,8 @@ func _on_lifetime_ended() -> void:
 	queue_free()
 
 
-func _on_hit(body: Node) -> void:
-	if body.has_method("take_damage"):
-		body.take_damage(damage)
-
-		# 触发伤害数字
-		EventBus.damage_number_requested.emit(body.global_position, damage, is_critical)
+func _on_hit(node: Node2D) -> void:
+	ServiceLocator.get_damage_manager().quick_damage(self, node, damage)
 
 	# 播放击中效果
 	if hit_effect_scene:
@@ -52,6 +48,6 @@ func _on_hit(body: Node) -> void:
 	queue_free()
 
 
-func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body != get_parent() and body.has_method("take_damage"):
-		_on_hit(body)
+func _on_area_2d_body_entered(node: Node2D) -> void:
+	if node.is_in_group("enemies"):
+		_on_hit(node)

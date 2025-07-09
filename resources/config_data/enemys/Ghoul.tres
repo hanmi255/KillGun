@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_cij2g")
-name = "Enemy"
+name = "Ghoul"
 max_hp = 50
 speed = 30.0
 attack_damage = 5

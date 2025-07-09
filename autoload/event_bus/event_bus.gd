@@ -6,7 +6,6 @@ signal player_death()
 signal player_moved(position: Vector2)
 
 # 敌人相关信号
-signal enemy_spawned(enemy_instance: EnemyBase)
 signal enemy_death(enemy_instance: EnemyBase)
 signal enemy_damaged(enemy_instance: EnemyBase, damage_amount: int)
 
@@ -21,6 +20,7 @@ signal weapon_equipped(weapon_instance: WeaponBase)
 # 游戏流程相关信号
 signal level_started(level_data: LevelData)
 signal level_completed(level_id: int)
+signal wave_completed(current_wave: int, total_waves: int, level_id: int)
 signal game_started()
 signal game_paused(is_paused: bool)
 signal game_over(victory: bool)

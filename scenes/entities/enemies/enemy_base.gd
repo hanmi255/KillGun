@@ -1,7 +1,7 @@
 class_name EnemyBase
 extends EntityBase
 
-@export var enemy_data: EnemyData: set = set_enemy_data
+@export var enemy_data: EnemyData
 
 @onready var body: Node2D = $Body
 @onready var animated_sprite: AnimatedSprite2D = $Body/AnimatedSprite2D
@@ -17,18 +17,6 @@ var current_target = null
 func _ready() -> void:
 	state_machine.owner_entity = self
 
-	EventBus.enemy_spawned.emit(self)
-
-
-func set_enemy_data(value: EnemyData) -> void:
-	if value == null or not is_instance_valid(state_machine):
-		return
-
-	enemy_data = value
-
-	if not Engine.is_editor_hint():
-		enemy_data = value.duplicate()
-
 
 func take_damage(damage_amount: int) -> void:
 	super.take_damage(damage_amount)
@@ -37,9 +25,6 @@ func take_damage(damage_amount: int) -> void:
 
 	if enemy_data.hit_sound:
 		ServiceLocator.get_audio_manager().play_sfx(enemy_data.hit_sound)
-
-	# 显示伤害数字
-	EventBus.damage_number_requested.emit(global_position, damage_amount, false)
 
 
 func die() -> void:
@@ -58,12 +43,23 @@ func _update_facing(direction: Vector2) -> void:
 		body.scale.x = 1
 
 
-func set_target(target) -> void:
+func set_target(target: Player) -> void:
 	current_target = target
 
 	# 设置目标后，如果是空闲状态，切换到移动状态
+	if not state_machine:
+		# 如果state_machine还未初始化，等待_ready完成后再执行
+		call_deferred("_deferred_set_target")
+		return
+
 	if state_machine.current_state_name == "idle" and current_target != null:
 		state_machine.change_state("move")
+
+
+func _deferred_set_target() -> void:
+	if state_machine and current_target != null:
+		if state_machine.current_state_name == "idle":
+			state_machine.change_state("move")
 
 
 func is_target_in_attack_range() -> bool:

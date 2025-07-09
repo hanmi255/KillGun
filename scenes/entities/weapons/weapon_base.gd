@@ -152,14 +152,7 @@ func _play_fire_animation() -> void:
 	
 	# 相机震动
 	if owner_entity and owner_entity is Player and owner_entity.camera:
-		var shake_intensity = weapon_data.camera_shake_intensity
-		var camera_tween = create_tween()
-		camera_tween.tween_property(
-			owner_entity.camera,
-			"offset",
-			Vector2.ZERO,
-			weapon_data.fire_rate
-		).from(Vector2(-shake_intensity / 2, shake_intensity))
+		Game.camera_shake(weapon_data.camera_shake_intensity)
 
 
 func _set_weapon_data(value: WeaponData) -> void:

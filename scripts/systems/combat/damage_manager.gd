@@ -33,7 +33,7 @@ func _ready() -> void:
 	ServiceLocator.register_damage_manager(self)
 
 
-func _calculate_damage(source, target, base_damage: int, damage_type: int = DamageType.PHYSICAL) -> DamageInfo:
+func _calculate_damage(source: Node2D, target: Node2D, base_damage: int, damage_type: int = DamageType.PHYSICAL) -> DamageInfo:
 	var damage_info = DamageInfo.new(base_damage, source, target, damage_type)
 	
 	# 暴击计算 (20%几率造成1.5倍伤害)
@@ -55,6 +55,6 @@ func _apply_damage(damage_info: DamageInfo) -> void:
 		)
 
 
-func quick_damage(source, target, amount: int) -> void:
+func quick_damage(source: Node2D, target: Node2D, amount: int) -> void:
 	var damage_info = _calculate_damage(source, target, amount)
 	_apply_damage(damage_info)
