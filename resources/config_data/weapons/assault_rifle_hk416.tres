@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="WeaponData" load_steps=7 format=3 uid="uid://devgc2odbyui2"]
+
+[ext_resource type="PackedScene" uid="uid://djr10m67v3iod" path="res://scenes/entities/bullets/bullet_base.tscn" id="1_4dyba"]
+[ext_resource type="AudioStream" uid="uid://3rr0co4axjks" path="res://assets/audio/wpn_fire_hk416.mp3" id="2_t2nq5"]
+[ext_resource type="AudioStream" uid="uid://qjhouivnv4gm" path="res://assets/audio/wpn_reload_end.mp3" id="3_cbnc8"]
+[ext_resource type="AudioStream" uid="uid://h4jvbcmslg3n" path="res://assets/audio/wpn_reload_start.mp3" id="4_blk84"]
+[ext_resource type="Script" uid="uid://b85kr4lqg8yj5" path="res://resources/data_models/weapon_data.gd" id="5_jn7d1"]
+[ext_resource type="Texture2D" uid="uid://rsfj2l2m4kxo" path="res://assets/texture/Guns/gun1.png" id="6_70c12"]
+
+[resource]
+script = ExtResource("5_jn7d1")
+weapon_name = "HK416"
+weapon_description = "高射速突击步枪，适合中距离作战。"
+damage = 100
+max_ammo = 9999999999
+fire_rate = 0.1
+reload_time = 2.0
+bullet_speed = 1000.0
+bullet_lifetime = 3.0
+weapon_texture = ExtResource("6_70c12")
+bullet_scene = ExtResource("1_4dyba")
+muzzle_flash_scale = 1.2
+camera_shake_intensity = 2.0
+fire_sound = ExtResource("2_t2nq5")
+reload_start_sound = ExtResource("4_blk84")
+reload_end_sound = ExtResource("3_cbnc8")
+can_auto_fire = true
+accuracy = 0.75
+critical_chance = 0.08
+critical_damage_multiplier = 1.4

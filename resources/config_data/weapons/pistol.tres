@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="WeaponData" load_steps=2 format=3 uid="uid://jbpx2lw5hkxo"]
+
+[ext_resource type="Script" uid="uid://b85kr4lqg8yj5" path="res://resources/data_models/weapon_data.gd" id="1_2qc6f"]
+
+[resource]
+script = ExtResource("1_2qc6f")
+weapon_name = "手枪"
+weapon_description = "标准手枪，可靠且精确。"
+damage = 15
+max_ammo = 12
+fire_rate = 0.3
+reload_time = 1.5
+bullet_speed = 900.0
+bullet_lifetime = 3.0
+muzzle_flash_scale = 0.8
+camera_shake_intensity = 1.5
+can_auto_fire = false
+accuracy = 0.9
+critical_chance = 0.05
+critical_damage_multiplier = 1.5

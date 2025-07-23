@@ -1,9 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://b8wrxqk74k07i"]
-
-[ext_resource type="Script" uid="uid://bfynsj5daf8vt" path="res://scripts/ui/canvas_layer/canvas_layer.gd" id="1_77wk8"]
-[ext_resource type="PackedScene" uid="uid://fmhf6cgdc1s" path="res://scenes/ui/hud/hud.tscn" id="2_tle5t"]
-
-[node name="CanvasLayer" type="CanvasLayer"]
-script = ExtResource("1_77wk8")
-
-[node name="HUD" parent="." instance=ExtResource("2_tle5t")]

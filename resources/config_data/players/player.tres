@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="PlayerData" load_steps=2 format=3 uid="uid://5uc2kewpmt1o"]
+
+[ext_resource type="Script" uid="uid://wpm8ns3mgqmb" path="res://resources/data_models/player_data.gd" id="1_mgwjs"]
+
+[resource]
+script = ExtResource("1_mgwjs")
+max_hp = 10
+speed = 40.0
+gold = 0
+metadata/_custom_type_script = "uid://wpm8ns3mgqmb"
